@@ -5,8 +5,12 @@ import person.Person;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public class DigitalTVContract extends Contract{
+public class DigitalTVContract extends Contract {
     private String[] channelPackage;
+
+    /**
+     * @param channelPackage channel packages
+     **/
 
     public DigitalTVContract(long id, LocalDate startDate, LocalDate expirationDate, long number, Person owner, String[] channelPackage) {
         super(id, startDate, expirationDate, number, owner);

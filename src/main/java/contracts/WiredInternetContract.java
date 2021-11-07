@@ -5,8 +5,12 @@ import person.Person;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class WiredInternetContract extends Contract{
+public class WiredInternetContract extends Contract {
     private int connectionSpeed;
+
+    /**
+     * @param connectionSpeed connection speed according to the tariff
+     **/
 
     public WiredInternetContract(long id, LocalDate startDate, LocalDate expirationDate, long number, Person owner, int connectionSpeed) {
         super(id, startDate, expirationDate, number, owner);

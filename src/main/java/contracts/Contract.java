@@ -12,6 +12,14 @@ public abstract class Contract {
     private long number;
     private Person owner;
 
+    /**
+     * @param id             contract id
+     * @param startDate      contract start date
+     * @param expirationDate contract expiration date
+     * @param number         contract number
+     * @param owner          contract owner
+     **/
+
     public Contract(long id, LocalDate startDate, LocalDate expirationDate, long number, Person owner) {
         this.id = id;
         this.startDate = startDate;

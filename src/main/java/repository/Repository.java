@@ -6,14 +6,36 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Repository {
+
+    /**
+     * @param repository contracts array
+     * @param size number of contracts in a repository
+     **/
+
     private Contract[] repository = new Contract[16];
     private int size = 0;
+
+    /**
+     * add method
+     * after checking free space
+     * adds a new item to the end of the repository
+     *
+     * @param contract new contract to add
+     **/
 
     public void add(Contract contract) {
         increaseSize();
         repository[size] = contract;
         size++;
     }
+
+    /**
+     * getById method
+     * searches for a contract for a given id
+     *
+     * @param id            given id
+     * @param expectedClass expected type of contract
+     **/
 
     public <T> T getById(long id, Class<T> expectedClass) {
         for (int i = 0; i < size; i++) {
@@ -23,6 +45,14 @@ public class Repository {
         }
         return null;
     }
+
+    /**
+     * removeById method
+     * searches for a contract for a given id
+     * and delete it
+     *
+     * @param id given id
+     **/
 
     public void removeById(long id) {
         for (int i = 0; i < size; i++) {
@@ -37,6 +67,13 @@ public class Repository {
             }
         }
     }
+
+    /**
+     * increaseSize method
+     * checks the number of contracts in a repository
+     * if it is equal to array length
+     * method increase array length
+     **/
 
     private void increaseSize() {
         if (size == repository.length) {

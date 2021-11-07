@@ -19,6 +19,9 @@ public class RepositoryTest {
     Contract contract2 = new MobileContract(2, LocalDate.of(2017, 5, 3), LocalDate.of(2022, 11, 30), 356, person2, 15, 13, 22);
     Contract contract3 = new WiredInternetContract(3, LocalDate.of(2010, 7, 13), LocalDate.of(2040, 7, 13), 556, person3, 50);
 
+    /**
+     * Test for add method
+     **/
 
     @Test
     public void testAdd() {
@@ -28,6 +31,10 @@ public class RepositoryTest {
         repository.add(contract3);
         Assert.assertEquals(3, repository.getSize());
     }
+
+    /**
+     * Test for getById method
+     **/
 
     @Test
     public void testGetById() {
@@ -39,6 +46,10 @@ public class RepositoryTest {
         Assert.assertEquals(contract2, repository.getById(2, MobileContract.class));
         Assert.assertEquals(contract3, repository.getById(3, WiredInternetContract.class));
     }
+
+    /**
+     * Test for removeById method
+     **/
 
     @Test
     public void testRemoveById() {

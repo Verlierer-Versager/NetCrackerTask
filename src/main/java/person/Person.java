@@ -11,6 +11,14 @@ public class Person {
     private Sex sex;
     private int passportSeriesAndNumber;
 
+    /**
+     * @param id                      person id
+     * @param fullName                person full name
+     * @param dateOfBirth             person date of birth
+     * @param sex                     person sex
+     * @param passportSeriesAndNumber passport series and number of person
+     **/
+
     public Person(long id, String fullName, LocalDate dateOfBirth, Sex sex, int passportSeriesAndNumber) {
         this.id = id;
         this.fullName = fullName;

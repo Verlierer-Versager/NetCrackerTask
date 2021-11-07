@@ -5,16 +5,22 @@ import person.Person;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class MobileContract extends Contract{
+public class MobileContract extends Contract {
     private int minutes;
     private int sms;
-    private int gigabits;
+    private int gigabytes;
 
-    public MobileContract(long id, LocalDate startDate, LocalDate expirationDate, long number, Person owner, int minutes, int sms, int gigabits) {
+    /**
+     * @param minutes   number of minutes in the tariff
+     * @param sms       number of SMS in the tariff
+     * @param gigabytes number of gigabytes in the tariff
+     **/
+
+    public MobileContract(long id, LocalDate startDate, LocalDate expirationDate, long number, Person owner, int minutes, int sms, int gigabytes) {
         super(id, startDate, expirationDate, number, owner);
         this.minutes = minutes;
         this.sms = sms;
-        this.gigabits = gigabits;
+        this.gigabytes = gigabytes;
     }
 
     public int getMinutes() {
@@ -33,12 +39,12 @@ public class MobileContract extends Contract{
         this.sms = sms;
     }
 
-    public int getGigabits() {
-        return gigabits;
+    public int getGigabytes() {
+        return gigabytes;
     }
 
-    public void setGigabits(int gigabits) {
-        this.gigabits = gigabits;
+    public void setGigabytes(int gigabytes) {
+        this.gigabytes = gigabytes;
     }
 
     @Override
@@ -47,12 +53,12 @@ public class MobileContract extends Contract{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MobileContract that = (MobileContract) o;
-        return minutes == that.minutes && sms == that.sms && gigabits == that.gigabits;
+        return minutes == that.minutes && sms == that.sms && gigabytes == that.gigabytes;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), minutes, sms, gigabits);
+        return Objects.hash(super.hashCode(), minutes, sms, gigabytes);
     }
 
     @Override
@@ -65,7 +71,7 @@ public class MobileContract extends Contract{
                 ", owner=" + getOwner() +
                 ", minutes=" + minutes +
                 ", sms=" + sms +
-                ", gigabits=" + gigabits +
+                ", gigabits=" + gigabytes +
                 '}';
     }
 }
