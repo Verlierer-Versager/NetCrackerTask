@@ -47,9 +47,13 @@ public class Repository {
         return null;
     }
 
-    public void setRepository(Contract[] repository) {
-        this.repository = repository;
-    }
+    /**
+     * search method
+     * searches for a contract for a given predicate
+     *
+     * @param predicate     given predicate
+     * @param expectedClass expected type of contract
+     **/
 
     public <T> T search(Predicate<Contract> predicate, Class<T> expectedClass) {
         for (int i = 0; i < size; i++) {
@@ -102,6 +106,11 @@ public class Repository {
     public int getSize() {
         return size;
     }
+
+    public void setRepository(Contract[] repository) {
+        this.repository = repository;
+    }
+
 
     @Override
     public boolean equals(Object o) {
