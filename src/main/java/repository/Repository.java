@@ -4,6 +4,7 @@ import contracts.Contract;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class Repository {
 
@@ -40,6 +41,19 @@ public class Repository {
     public <T> T getById(long id, Class<T> expectedClass) {
         for (int i = 0; i < size; i++) {
             if (repository[i].getId() == id && repository[i].getClass().equals(expectedClass)) {
+                return (T) repository[i];
+            }
+        }
+        return null;
+    }
+
+    public void setRepository(Contract[] repository) {
+        this.repository = repository;
+    }
+
+    public <T> T search(Predicate<Contract> predicate, Class<T> expectedClass) {
+        for (int i = 0; i < size; i++) {
+            if (predicate.test(repository[i]) && repository[i].getClass().equals(expectedClass)) {
                 return (T) repository[i];
             }
         }
