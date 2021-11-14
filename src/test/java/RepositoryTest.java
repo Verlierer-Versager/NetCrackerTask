@@ -67,6 +67,10 @@ public class RepositoryTest {
         Assert.assertEquals(0, repository.getSize());
     }
 
+    /**
+     * Test for search method
+     **/
+
     @Test
     public void testSearch() {
         Repository repository = new Repository();

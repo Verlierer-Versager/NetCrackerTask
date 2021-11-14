@@ -48,6 +48,21 @@ public class Repository {
     }
 
     /**
+     * getByIndex method
+     * searches for a contract for a given id
+     *
+     * @param index         given index
+     * @param expectedClass expected type of contract
+     **/
+
+    public <T> T getByIndex(int index, Class<T> expectedClass) {
+        if (index < size) {
+            return (T) repository[index];
+        }
+        return null;
+    }
+
+    /**
      * search method
      * searches for a contract for a given predicate
      *

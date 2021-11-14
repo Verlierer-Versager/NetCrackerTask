@@ -11,14 +11,15 @@ public class InsertionSort implements ISorter {
         Contract[] repo = repository.getRepository();
         for (int i = 0; i < repository.getSize(); i++) {
             Contract value = repo[i];
-            for (int j = i - 1; j >= 0; j--) {
+            int j = i - 1;
+            for (; j >= 0; j--) {
                 if (comparator.compare(repo[j], value) > 0) {
-                    repo[i + 1] = repo[i];
+                    repo[j + 1] = repo[j];
                 } else {
                     break;
                 }
             }
-            repo[i + 1] = value;
+            repo[j + 1] = value;
         }
         repository.setRepository(repo);
     }
