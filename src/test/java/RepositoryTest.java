@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import repository.Repository;
 
 import java.time.LocalDate;
+import java.util.function.Predicate;
 
 
 public class RepositoryTest {
@@ -64,5 +65,19 @@ public class RepositoryTest {
         repository.removeById(3);
         Assert.assertNull(repository.getById(3, DigitalTVContract.class));
         Assert.assertEquals(0, repository.getSize());
+    }
+
+    @Test
+    public void testSearch() {
+        Repository repository = new Repository();
+        repository.add(contract1);
+        repository.add(contract2);
+        repository.add(contract3);
+        Predicate<Contract> predicate1 = contract -> contract.getStartDate().equals(contract1.getStartDate());
+        Assert.assertEquals(contract1, repository.search(predicate1, DigitalTVContract.class));
+        Predicate<Contract> predicate2 = contract -> contract.getOwner().equals(contract2.getOwner());
+        Assert.assertEquals(contract2, repository.search(predicate2, MobileContract.class));
+        Predicate<Contract> predicate3 = contract -> contract.getExpirationDate().equals(contract3.getExpirationDate());
+        Assert.assertEquals(contract3, repository.search(predicate3, WiredInternetContract.class));
     }
 }
