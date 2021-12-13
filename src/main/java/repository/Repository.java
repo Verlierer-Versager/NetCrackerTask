@@ -114,6 +114,31 @@ public class Repository {
         }
     }
 
+    /**
+     * createContractId method
+     *
+     * @return id for next contract to add which is size + 1
+     **/
+
+    public long createContractId() {
+        return size + 1;
+    }
+
+    /**
+     * @param passportSeriesAndNumber is an uniq identification for person
+     *                                if owner has already existed then return already existing owner id
+     * @return id for owner for next contract to add
+     **/
+
+    public long createOwnerId(int passportSeriesAndNumber) {
+        Contract temp = this.search(contract -> contract.getOwner().getPassportSeriesAndNumber() == passportSeriesAndNumber, Contract.class);
+        if (temp != null) {
+            return temp.getOwner().getId();
+        } else {
+            return size + 1;
+        }
+    }
+
     public Contract[] getRepository() {
         return repository;
     }
