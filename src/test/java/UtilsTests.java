@@ -28,7 +28,8 @@ public class UtilsTests {
     public void readToRepository() {
         Repository repository = new Repository();
         try {
-            CSVUtils.readToRepository(".\\src\\main\\resources\\CSVtest.csv", repository);
+            CSVUtils csvUtils = new CSVUtils();
+            csvUtils.readToRepository(".\\src\\main\\resources\\CSVtest.csv", repository);
             Assert.assertEquals(3, repository.getSize());
             Assert.assertEquals(contract1, repository.getByIndex(0, DigitalTVContract.class));
             Assert.assertEquals(contract2, repository.getByIndex(1, MobileContract.class));

@@ -1,21 +1,20 @@
 package utils.validator.impl;
 
 import contracts.Contract;
-import contracts.DigitalTVContract;
+import contracts.WiredInternetContract;
 import utils.validator.Status;
 import utils.validator.ValidationResult;
 import utils.validator.Validator;
 
-public class DigitalTVContractValidator implements Validator {
+public class WiredInternetContractValidator implements Validator {
     @Override
     public ValidationResult validate(Contract contract) {
         ValidationResult validationResult = new ValidationResult();
-        if (DigitalTVContract.class.equals(contract.getClass())) {
-            DigitalTVContract digitalTVContract = (DigitalTVContract) contract;
-
-            if (digitalTVContract.getSize() == 0) {
+        if (WiredInternetContract.class.equals(contract.getClass())) {
+            WiredInternetContract wiredInternetContract = (WiredInternetContract) contract;
+            if (wiredInternetContract.getConnectionSpeed() <= 0) {
                 validationResult.setStatus(Status.ERROR);
-                validationResult.addWarning("channelPackage is empty");
+                validationResult.addWarning("connectionSpeed is incorrect");
             }
         }
         return validationResult;

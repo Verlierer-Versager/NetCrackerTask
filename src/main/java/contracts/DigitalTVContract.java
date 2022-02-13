@@ -25,6 +25,10 @@ public class DigitalTVContract extends Contract {
         this.channelPackage = channelPackage;
     }
 
+    public int getSize() {
+        return channelPackage.length;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

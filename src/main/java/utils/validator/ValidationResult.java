@@ -1,10 +1,11 @@
 package utils.validator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationResult {
-    private Status status;
-    private List<String> warnings;
+    private Status status = null;
+    private List<String> warnings = new ArrayList<>();
 
     public ValidationResult() {
     }
