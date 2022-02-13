@@ -9,7 +9,7 @@ public class Person {
     private String fullName;
     private LocalDate dateOfBirth;
     private Sex sex;
-    private int passportSeriesAndNumber;
+    private long passportSeriesAndNumber;
 
     /**
      * @param id                      person id
@@ -19,7 +19,7 @@ public class Person {
      * @param passportSeriesAndNumber passport series and number of person
      **/
 
-    public Person(long id, String fullName, LocalDate dateOfBirth, Sex sex, int passportSeriesAndNumber) {
+    public Person(long id, String fullName, LocalDate dateOfBirth, Sex sex, long passportSeriesAndNumber) {
         this.id = id;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -63,11 +63,11 @@ public class Person {
         this.sex = sex;
     }
 
-    public int getPassportSeriesAndNumber() {
+    public long getPassportSeriesAndNumber() {
         return passportSeriesAndNumber;
     }
 
-    public void setPassportSeriesAndNumber(int passportSeriesAndNumber) {
+    public void setPassportSeriesAndNumber(long passportSeriesAndNumber) {
         this.passportSeriesAndNumber = passportSeriesAndNumber;
     }
 

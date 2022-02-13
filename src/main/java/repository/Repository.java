@@ -130,7 +130,7 @@ public class Repository {
      * @return id for owner for next contract to add
      **/
 
-    public long createOwnerId(int passportSeriesAndNumber) {
+    public long createOwnerId(long passportSeriesAndNumber) {
         Contract temp = this.search(contract -> contract.getOwner().getPassportSeriesAndNumber() == passportSeriesAndNumber, Contract.class);
         if (temp != null) {
             return temp.getOwner().getId();
