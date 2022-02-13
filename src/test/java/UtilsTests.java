@@ -8,9 +8,12 @@ import person.Person;
 import person.Sex;
 import repository.Repository;
 import utils.CSVUtils;
+import utils.validator.Status;
+import utils.validator.ValidationResult;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class UtilsTests {
     Person person1 = new Person((long) 1, "Person1", LocalDate.of(2000, 5, 17), Sex.FEMALE, 2014664480);
@@ -38,5 +41,27 @@ public class UtilsTests {
             e.printStackTrace();
         }
         //Assert.assertEquals(3, repository.getSize());
+    }
+
+    @Test
+    public void validate() {
+        Repository repository = new Repository();
+        try {
+            CSVUtils csvUtils = new CSVUtils();
+            ValidationResult validationResult = csvUtils.readToRepository(".\\src\\main\\resources\\CSVtest_bad.csv", repository);
+            Assert.assertEquals(1, repository.getSize());
+            Assert.assertEquals(Status.ERROR, validationResult.getStatus());
+
+            Object[] warnings = {
+                    "startDate is later than expirationDate",
+                    "owner fullName is blank",
+                    "owner sex is null or incorrect"
+            };
+
+            Assert.assertTrue(Arrays.equals(warnings, validationResult.getWarnings().toArray()));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

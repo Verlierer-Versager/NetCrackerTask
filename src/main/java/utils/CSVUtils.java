@@ -35,11 +35,13 @@ public class CSVUtils {
             new WiredInternetContractValidator()
     };
 
-    public void readToRepository(String fileName, Repository repository) throws IOException {
+    public ValidationResult readToRepository(String fileName, Repository repository) throws IOException {
+        ValidationResult validationResultAll = new ValidationResult();
         CSVReader csvReader = new CSVReader(new FileReader(fileName), ';');
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String[] line;
         while ((line = csvReader.readNext()) != null) {
+            ValidationResult validationResult = new ValidationResult();
             try {
                 LocalDate startDate;
                 LocalDate expirationDate;
@@ -59,7 +61,7 @@ public class CSVUtils {
                 switch (line[4]) {
                     case "TV" -> {
                         Contract contract = new DigitalTVContract(repository.createContractId(), startDate, expirationDate, number, owner, line[5].split(","));
-                        ValidationResult validationResult = validate(contract);
+                        validationResult = validate(contract);
                         if (validationResult.getStatus().equals(Status.OK)) {
                             repository.add(contract);
                         } else {
@@ -75,7 +77,7 @@ public class CSVUtils {
                             tariff[i] = Integer.parseInt(temp[i]);
                         }
                         Contract contract = new MobileContract(repository.createContractId(), startDate, expirationDate, number, owner, tariff[0], tariff[1], tariff[2]);
-                        ValidationResult validationResult = validate(contract);
+                        validationResult = validate(contract);
                         if (validationResult.getStatus().equals(Status.OK)) {
                             repository.add(contract);
                         } else {
@@ -86,7 +88,7 @@ public class CSVUtils {
                     }
                     default -> {
                         Contract contract = new WiredInternetContract(repository.createContractId(), startDate, expirationDate, number, owner, Integer.parseInt(line[5]));
-                        ValidationResult validationResult = validate(contract);
+                        validationResult = validate(contract);
                         if (validationResult.getStatus().equals(Status.OK)) {
                             repository.add(contract);
                         } else {
@@ -99,8 +101,17 @@ public class CSVUtils {
             } catch (Exception e) {
                 csvReader.readNext();
             }
+            List<String> newWarnings = validationResultAll.getWarnings();
+            newWarnings.addAll(validationResult.getWarnings());
+            validationResultAll.setWarnings(newWarnings);
+            if (validationResultAll.getSize() > 0) {
+                validationResultAll.setStatus(Status.ERROR);
+            } else {
+                validationResultAll.setStatus(Status.OK);
+            }
         }
         csvReader.close();
+        return validationResultAll;
     }
 
     private ValidationResult validate(Contract contract) {
